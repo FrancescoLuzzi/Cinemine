@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+  <meta charset="UTF-8">
+    <head>
+        <title>HomePage User</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../styles/css/login.css">
+        <link rel="stylesheet" href="../styles/css/loginApis.css">
+        <link rel="stylesheet" href="../styles/css/home.css">
+        <link rel="stylesheet" href="../styles/css/homeUser.css">
+        <link rel="stylesheet" href="../styles/css/popup.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="../scripts/DB/User.js"></script>
+        <script type="text/javascript" src="../scripts/DB/Cinema.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/viewLogics.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/home.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/homeUser.js"></script>
+      </head>
+
+    <body>
+      <!--Popup-->
+      <div id="popup" class="w3-round">
+      </div>
+
+      <div id="mainPage">
+        <div class="top-container" >
+            <h1 class="w3-jumbo link" onclick="window.location.href='./home.html'"><strong>Cinemine</strong></h1>
+            <p><strong>Tutti i film come, quando e dove vuoi.</strong></p>
+        </div>
+
+        <div class="header" id="myHeader">
+            <div class="w3-display-left margin_left">
+              <h1 class="w3-text w3-text-white link" onclick="window.location.href='./home.html'">Cinemine</h1>
+            </div>
+            <div class="w3-display-right margin_right">
+              <div class="w3-dropdown-hover w3-round w3-grey w3-text w3-text-white" >
+                <button class="w3-button w3-round">
+                  Gestisci Account <em class="material-icons" style="font-size: 1rem !important;" >expand_more</em>
+                </button>
+                <div class="w3-dropdown-content w3-border w3-bar-block w3-round w3-grey">
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='clearAndAppend(document.querySelector("#popup"),createInfos(getUserInfos()));popup();'>
+                    Impostazioni
+                  </button>
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='logout("User");'>
+                    Logout
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content" >
+          <div class="left-column">
+            <br>
+            <br>
+            <strong><h1>I tuoi biglietti</h1></strong>
+            <!-- Lista dei biglietti-->
+            <div id="ticketDisplayer">
+            </div>
+          </div>
+
+          <div class="center-column">
+            <br>
+            <h1><strong>Ultime uscite al cinema</strong></h1>
+            <div id="filmDisplayer" class="display-middle">
+            </div>
+          </div>
+
+          <div class="right-column">
+            <br>
+            <br>
+            <strong><h1>I tuoi film noleggiati</h1></strong>
+            <!-- Lista dei Film noleggiati-->
+            <div id="rentedDisplayer">
+            </div>
+          </div>
+
+        </div>
+          
+        <footer >
+          <div class="content footer">
+            <div class="left-column">
+              <p><strong>Contacts:</strong><br>
+                email: cinemine@gmail.com<br>
+                telefono: 800 xxxxxxx
+              </p>
+              <p> <strong>Dove siamo:</strong> <br>
+                Via xxx Bologna<br>
+              </p>
+            </div>
+          <div class="center-column">
+            <p style="padding: 2rem;"> immagine logo CINEMINE</p>
+          </div>
+
+          <div class="right-column">
+            <p style="padding: 2rem;">Link a Faq e documenti legali (es privacy)</p>
+          </div>
+          </div>
+
+          
+        </div>
+      </footer>
+      </div>
+      
+    </body>
+    <script>
+     
+      const filmDisplayer=document.getElementById("filmDisplayer");
+      const ticketDisplayer=document.getElementById("ticketDisplayer");
+      const rentedDisplayer=document.getElementById("rentedDisplayer");
+
+      window.onload=()=>{
+        isLogged("User");
+        let films= getOwnedFilmsCinema();
+        for( let el of films){
+          let film=createFilmSlide(el);
+          filmDisplayer.appendChild(film);
+        }
+        films=getRentedFilms();    
+        for( let el of films){
+          let rent=createRentedFilm(el);
+          rentedDisplayer.appendChild(rent);
+        }
+        let tickets=getOwnedTickets();
+        for( let el of tickets){
+            let ticket=createTicket(el);
+            ticketDisplayer.appendChild(ticket);
+        }
+      };
+      var header = document.getElementById("myHeader");
+      var sticky = header.offsetTop;
+      window.onscroll = function() {stickyFuntion(header,sticky)};
+
+      carousel(0);
+
+    </script>
+</html>

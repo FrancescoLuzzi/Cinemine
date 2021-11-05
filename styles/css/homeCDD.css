@@ -1,0 +1,49 @@
+/*HomeCDD*/
+
+#addPermissionForm {
+	position: relative;
+	right: 10%;
+	left: 10%;
+	height: 100%;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+#addPermissionForm > * {
+	margin: 0.3rem;
+	min-width: 60%;
+}
+
+.addFilm {
+	font-size: 50px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.permission {
+	border: 2px solid black;
+	padding: 0.5rem;
+	margin: 0.2rem;
+}
+.permission > * {
+	margin: 0.5rem;
+}
+
+.infosContent > input[type='text'],
+.infosContent > input[type='number'],
+.infosContent > select {
+	padding: 9px;
+	width: 40%;
+}
+
+.infosContent > input[type='file'] {
+	padding: 9px;
+	width: 80%;
+}
+
+.infosContent > * {
+	border-radius: 4px;
+}

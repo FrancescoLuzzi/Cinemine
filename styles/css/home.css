@@ -1,0 +1,134 @@
+.strong {
+	font-weight: bolder;
+}
+
+#mainPage {
+	height: 100vh;
+	width: 100vw;
+}
+/*Contenitore al Top della pagina che viene COPERTO da .header*/
+.top-container {
+	background-color: #f1f1f1;
+	padding: 30px;
+	text-align: center;
+	z-index: 10;
+	min-height: 15%;
+	background-image: url('../../images/popcorn.jpg');
+	background-size: cover;
+}
+
+/*Header che continuerà ad essere nella parte superiore della pagina anche
+quando si scrolla in basso*/
+.header {
+	background-color: black;
+	position: relative;
+	height: 10%;
+	z-index: 10;
+}
+
+.sticky {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.sticky + .content {
+	padding-top: 102px;
+}
+
+.loginBtn {
+	padding: 9.5px 15px !important;
+}
+/*Main content devided in 3 columns*/
+.content {
+	background-color: lightgray;
+	margin-top: -0.1rem;
+	width: 100%;
+	min-height: 62.3%;
+	display: flex;
+	align-items: stretch;
+	flex-direction: row;
+	padding: 1rem;
+}
+
+.margin_right {
+	margin-right: 5rem !important;
+}
+
+.margin_left {
+	margin-left: 3rem !important;
+}
+
+.invisible {
+	display: none;
+}
+
+.filmDisplayer {
+	width: 100%;
+	height: 100%;
+}
+
+.mySlides {
+	display: none;
+	margin: 1rem;
+}
+
+.mySlides > .imgFilm {
+	aspect-ratio: 9/14;
+	width: 25vw;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.display-middle {
+	top: 25%;
+	margin: auto;
+}
+
+.right-column,
+.left-column,
+.center-column {
+	flex: 1;
+	text-align: center;
+}
+
+/*FILM LABELS*/
+.filmLabel {
+	min-height: 160px;
+	width: 80%;
+	border: 2px solid black;
+	margin-bottom: 0.5rem;
+	padding: 0.4rem;
+	align-self: center;
+	box-shadow: 0 8px 8px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 19%);
+}
+
+.filmLabel > .imgFilm {
+	width: 90px;
+	height: 150px;
+	float: left;
+	margin-right: 0.5rem;
+}
+
+.filmLabel > button {
+	margin: 1rem;
+}
+
+/*FOOTER WITH INSIDE .content*/
+
+footer {
+	width: 100%;
+	min-height: 15%;
+}
+
+.footer {
+	border-top: solid black 1px;
+	background-color: darkgrey;
+}
+
+footer > .content {
+	height: 100% !important;
+}
+
+option:hover {
+	background-color: rgba(211, 211, 211, 0.619);
+}

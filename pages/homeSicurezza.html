@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="il">
+	<head>
+		<title>Home Sicurezza</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../styles/css/login.css" />
+		<link rel="stylesheet" href="../styles/css/loginApis.css" />
+		<link rel="stylesheet" href="../styles/css/home.css" />
+		<link rel="stylesheet" href="../styles/css/homeSicurezza.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+		<script type="text/javascript" src="../scripts/DB/AddettoSicurezza.js"></script>
+		<script type="text/javascript" src="../scripts/DB/log.js"></script>
+    <script type="text/javascript" src="../scripts/DB/User.js"></script>
+    <script type="text/javascript" src="../scripts/DB/Cinema.js"></script>
+    <script type="text/javascript" src="../scripts/DB/CDD.js"></script>
+		<script type="text/javascript" src="../scripts/site_logics/viewLogics.js"></script>
+		<script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+		<script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+		<script type="text/javascript" src="../scripts/codeGenerators/home.js"></script>
+		<script type="text/javascript" src="../scripts/codeGenerators/homeSicurezza.js"></script>
+	</head>
+	<body>
+		<div id="popup"></div>
+		<div id="mainPage">
+			<div class="topContainerSicurezza">
+                <strong><h1 class="w3-jumbo w3-text-white link" onclick="window.location.href='./home.html'">Cinemine Security</h1></strong>
+      </div>
+      
+      <div class="header" id="myHeader">
+        <div class="w3-display-left margin_left">
+          <h1 class="w3-text w3-text-white link" onclick="window.location.href='./home.html'">Cinemine</h1>
+        </div>
+        <div class="w3-display-right margin_right">
+          <div class="w3-dropdown-hover w3-round w3-grey w3-text w3-text-white" >
+            <button class="w3-button w3-round">
+              Gestisci Account <em class="material-icons" style="font-size: 1rem !important;" >expand_more</em>
+            </button>
+            <div class="w3-dropdown-content w3-border w3-bar-block w3-round w3-grey">
+              <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='clearAndAppend(document.querySelector("#popup"),createInfos(getAddettoSicurezza()));popup()''>
+                Impostazioni
+              </button>
+              <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='logout("Addetto Sicurezza");'>
+                Logout
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+
+            <div class="content">
+                <div class="left-column">
+                    <strong><h2>Gestisci Cinema e Case di distribuzione</h2></strong>
+                    <div id="other" class="accountsDisplayer"></div>
+                </div>
+                <div class="right-column">
+                    <strong><h2>Gestisci Users</h2></strong>
+                    <div id='users' class="accountsDisplayer"></div>
+                </div>
+            </div>
+            <div class="content">
+                  <div class="findLogs">
+                    <strong ><h2 class="w3-xxxlarge">Find Logs</h2></strong>
+                  </div>
+                  
+                  <div class='logOut'>
+                    <h2>Client specific</h2>
+                    <input class="w3-round w3-input" type="text" name="ClientName" id="ClientName" placeholder="clientName">
+                    <br>
+                    <button class="w3-btn w3-center-div w3-black w3-round" onclick="clientLogs(document.getElementById('ClientName').value, document.getElementById('logDisplayer'))">Cerca</button>
+                  </div>
+
+                  <div class='logOut'>
+                    <h2>Precise Date</h2>
+                    <input class="w3-round w3-input" type="date" name="Data" id="Data" placeholder="preciseDate">
+                    <br>
+                    <button class="w3-btn w3-center-div w3-black w3-border-round" onclick="logsDate(document.getElementById('Data').value, document.getElementById('logDisplayer'))">Cerca</button>
+                  </div>
+
+                  <div class='logOut'>
+                    <h2>Time interval</h2>
+                    <input class="w3-round w3-input" type="date" name="DataStart" id="DataStart" placeholder="startDate">
+                    <br>
+                    <input class="w3-round w3-input" type="date" name="DataEnd" id="DataEnd" placeholder="endDate">
+                    <br>
+                    <button class="w3-btn w3-center-div w3-black w3-border-round" onclick="logsBetweenDates(document.getElementById('DataStart').value, document.getElementById('DataEnd').value, document.getElementById('logDisplayer'))">Cerca</button>
+                  </div>
+                  <div class="findLogs">
+                   <h2>Logs</h2>
+                  </div>
+                  <div id="logDisplayer"></div>
+          
+            </div>
+		</div>
+	</body>
+  <script>
+    window.onload=()=>{
+        isLogged("AddettoSicurezza");
+        updateAccounts(document.getElementById('users'),document.getElementById('other'));
+      };
+  </script>
+</html>

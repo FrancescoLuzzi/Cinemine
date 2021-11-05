@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="it">
+  <meta charset="UTF-8">
+    <head>
+        <title>FilmPage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../styles/css/login.css">
+        <link rel="stylesheet" href="../styles/css/loginApis.css">
+        <link rel="stylesheet" href="../styles/css/home.css">
+        <link rel="stylesheet" href="../styles/css/filmPage.css">
+        <link rel="stylesheet" href="../styles/css/popup.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <script type="text/javascript" src="../scripts/DB/Cinema.js"></script>
+        <script type="text/javascript" src="../scripts/DB/User.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/viewLogics.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/home.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/filmPage.js"></script>
+      </head>
+      </head>
+
+    <body>
+      <!--Popup for settings-->
+      <div id="popup"></div>
+
+      <div id="mainPage">
+        <div class="top-container" >
+            <h1 class="w3-jumbo link" onclick="window.location.href='./home.html'"><strong>Cinemine</strong></h1>
+            <p><strong>Tutti i film come, quando e dove vuoi.</strong></p>
+        </div>
+
+        <div class="header" id="myHeader">
+          <div class="w3-display-left margin_left">
+            <h1 class="w3-text w3-text-white link" onclick="window.location.href='./home.html'">Cinemine</h1>
+          </div>
+          <div class="w3-display-right margin_right">
+            <div class="w3-dropdown-hover w3-round w3-grey w3-text w3-text-white" >
+              <button class="w3-button w3-round">
+                Gestisci Account <em class="material-icons" style="font-size: 1rem !important;" >expand_more</em>
+              </button>
+              <div class="w3-dropdown-content w3-border w3-bar-block w3-round w3-grey">
+                <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='clearAndAppend(document.querySelector("#popup"),createInfos(getUserInfos()));popup()''>
+                  Impostazioni
+                </button>
+                <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='logout("User");'>
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content">
+            <div class="first-column" style="margin-top: 3rem;">
+                <form id="Form" method="POST" action="./homeUser.html" onsubmit="event.preventDefault(); prenota()">      
+                    <p><select class="w3-input w3-light-grey w3-border w3-border-round w3-border-light-grey" placeholder="Cinema" type="text" name="cinema" id="cinema" required>
+                    </select>
+                    </p>
+                    <p><select class="w3-input w3-light-grey w3-border w3-border-round w3-border-light-grey " onchange="changer(this.options[this.selectedIndex].value,form,cinemaSelection)" name="Type" id="Type" required >
+                            <option value="Al Cinema" selected>Al Cinema</option>
+                        </select>
+                    </p>
+                    <p><input class="w3-input w3-light-grey w3-border w3-border-round w3-border-light-grey" type='date' id='date' name='Date' required/></p>
+                    <p><select class="w3-input w3-light-grey w3-border w3-border-round w3-border-light-grey " placeholder="Orario" name="Orario" id="Orario"  ></select></p>
+                    <p><input class="w3-input w3-light-grey w3-border-round w3-border-light-grey " min="0" type="number" placeholder="Quantità biglietti"  name="Quantity" id="Quantity" readonly></p>
+                    <p><input class="w3-input w3-light-grey w3-border-round w3-border-light-grey "  type="text" placeholder="Total"  name="Total" id="Total" value="0€" readonly></p>
+                    <select class="w3-input w3-light-grey w3-border w3-border-round w3-border-light-grey " placeholder="Numero Sala" name="salaNum" id="salaNum"></select>
+                    <p class=" prenotaInfos">Click SX mouse <strong id="intero" style="color: blue;cursor: pointer;">INTERO</strong></p>
+                    <p class=" prenotaInfos">Click DX mouse <strong id="ridotto" style="color: palevioletred;cursor: pointer;">RIDOTTO</strong></p>
+                    <div id="sala" name='Sala' class=" sala"></div>
+                    <div class="p-t-15">
+                      <p class="w3-margin-top"><button class="w3-btn w3-center-div w3-black w3-border-round" type="submit" style="margin:auto!important; width:100%">Prenota</button></p>
+                    </div>
+                  </form>
+            </div>
+            <div class="second-column" style="margin-top: 3.5rem;"><img class="imgFilm" id="image" src=""></div>
+        </div>
+        
+          
+        <footer >
+          <div class="content footer">
+            <div class="left-column">
+              <p><strong>Contacts:</strong><br>
+                email: cinemine@gmail.com<br>
+                telefono: 800 xxxxxxx
+              </p>
+              <p> <strong>Dove siamo:</strong> <br>
+                Via xxx Bologna<br>
+              </p>
+            </div>
+          <div class="center-column">
+            <p style="padding: 2rem;"> immagine logo CINEMINE</p>
+          </div>
+
+          <div class="right-column">
+            <p style="padding: 2rem;">Link a Faq e documenti legali (es privacy)</p>
+          </div>
+          </div>
+
+          
+        </div>
+      </footer>
+      </div>
+    </body>
+    <script>
+    
+        var header = document.getElementById("myHeader");
+        var sticky = header.offsetTop;
+        window.onscroll = function() {stickyFuntion(header,sticky)};
+ 
+        const form=document.getElementById("Form");
+          const cinemaSelection=document.getElementById('cinema');
+          const orarioSelection=document.getElementById('Orario');
+          const board=document.getElementById('sala');
+
+        var filename="";
+        var show;
+        var intero=6;
+        var ridotto=3;
+
+        function setPolitiche(){
+          let politicaIntero;
+          let politicaRidotto
+          for (let el of getPoliticheVendita()){
+            if(el.nome=='intero') {intero=el.prezzo; politicaIntero=el.intervallo;}
+            else {ridotto=el.prezzo; politicaRidotto=el.intervallo;}
+          }
+          document.getElementById('intero').innerText+=` ${intero}€`
+          document.getElementById('intero').title+=`${politicaIntero}`
+          document.getElementById('ridotto').innerText+=` ${ridotto}€`
+          document.getElementById('ridotto').title+=` ${politicaRidotto}`
+        }
+
+        function setRentable(cinemaSelection,filename){
+          try{
+          getRentable(cinemaSelection.value, filename);
+          document.getElementById('Type').appendChild(createOption('Noleggio'));
+          }
+          catch{
+            alert('film non noleggiabile da questo Cinema!')
+          }
+        }
+
+        window.onload=()=>{
+          isLogged("User");
+          try {
+            filename=window.location.href.split("?")[1].split("=")[1];
+            document.getElementById("image").src=`../images/${filename}`;
+          } catch (error) {
+            window.location.href="../errors/exception.html";
+          }
+          addCinemaNames(cinemaSelection);
+          updateForm(form,cinemaSelection);
+          setRentable(cinemaSelection,filename);
+          setPolitiche();
+        }
+
+        function updateForm(form, cinemaSelection) {
+          let isNoleggio = form['Type'].options[form['Type'].selectedIndex].value == 'Noleggio';
+          let cinemaName = cinemaSelection.options[cinemaSelection.selectedIndex].value;
+          if (!isNoleggio) {
+            updateSchedule();
+            return;
+          }
+          let data = getRentable(cinemaName, filename);
+          form['Date'].max = data;
+          form['Date'].min = formatDate(new Date());
+        }
+        
+        const checker_date=new RegExp("\\d{4}-\\d{2}-\\d{2}");
+        
+        function updateSalaShow(){
+          if(form['Type'].options[form['Type'].selectedIndex].value=='Noleggio')return;
+          let salaNum=form['salaNum'].options[form['salaNum'].selectedIndex];
+          if(salaNum==undefined || +salaNum.value <= 0)return;
+          if(form['Date'].value.match(checker_date)){
+            clear(board);
+            form['Quantity'].value=0;
+            form['Total'].value="0€";
+            show={};
+            let cinemaName = cinemaSelection.options[cinemaSelection.selectedIndex].value;
+            show=getShow(cinemaName,filename, orarioSelection.options[orarioSelection.selectedIndex].value, form['Date'].value,salaNum.value);
+            generaMatriceSala(show.sala.sala,board);
+          }
+        }
+
+        function updateSchedule(){
+          let cinemaName = cinemaSelection.options[cinemaSelection.selectedIndex].value;
+          clear(board);
+          clear(orarioSelection);
+          clear(form['salaNum']);
+          try{
+            let schedule=getSchedule(cinemaName,filename);
+            form['Date'].max=schedule.intervalloScheduled.end;
+            form['Date'].min=schedule.intervalloScheduled.start;
+            form['Date'].value=formatDate(new Date());
+            for(let el of schedule.orari){
+              let orario= createOption(el);
+              orarioSelection.appendChild(orario);
+            }
+            for(let el of schedule.sale){
+              let sala=createOption(el.numero);
+              form['salaNum'].appendChild(sala);
+            }
+            updateSalaShow();
+          }
+          catch(e){
+            console.log(e);
+            alert('errore caricamento programmazione');
+          }
+        }
+
+        form['Date'].onchange=updateSalaShow
+        orarioSelection.onchange=updateSalaShow
+        form['salaNum'].onchange=updateSalaShow;
+
+        cinemaSelection.onchange=()=>{updateForm(form,cinemaSelection);};
+
+
+
+        
+    </script>
+</html>

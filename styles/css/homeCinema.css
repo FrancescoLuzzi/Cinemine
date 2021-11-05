@@ -1,0 +1,89 @@
+/*HomeCinema*/
+
+#labelDisplayer {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+}
+
+.free {
+	padding: 0.2rem;
+	cursor: pointer;
+	border: solid black 1px;
+	margin-left: 0.1rem;
+	margin-right: 0.1rem;
+	border-radius: 30%;
+	background-color: green;
+	user-select: none;
+}
+
+.free:hover {
+	background-color: greenyellow;
+}
+
+.scale {
+	font-size: 42px !important;
+	cursor: pointer;
+	position: relative;
+	top: 9px;
+	border-radius: 30%;
+	user-select: none;
+}
+
+.scale:hover {
+	background: rgba(255, 255, 255, 0.626);
+}
+
+#salaSelezionata {
+	padding: 9px;
+	width: 25%;
+	border: none;
+	border-bottom: 1px solid #ccc;
+}
+
+#popup {
+	width: 80vw !important;
+	height: 60vh !important;
+	padding: 20px !important;
+}
+
+.addSala {
+	width: 20% !important;
+	margin-left: 0px;
+}
+
+.infosContent > input[type='text'],
+.infosContent > input[type='number'],
+.infosContent > select {
+	padding: 9px;
+	width: 40%;
+}
+.infosContent > * {
+	border-radius: 4px;
+}
+
+.salaContent {
+	width: 75%;
+	height: 100%;
+	float: left;
+	overflow: scroll;
+}
+
+#sala {
+	width: 100%;
+	height: 100%;
+	overflow: scroll;
+}
+
+.politiche {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+
+.pol {
+	width: 28%;
+	margin: 0.5rem;
+}

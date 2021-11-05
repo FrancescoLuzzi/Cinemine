@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="it">
+  <meta charset="UTF-8">
+    <head>
+        <title>HomePage CasaDiDistribuzione</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../styles/css/login.css">
+        <link rel="stylesheet" href="../styles/css/loginApis.css">
+        <link rel="stylesheet" href="../styles/css/home.css">
+        <link rel="stylesheet" href="../styles/css/autocompletion.css">
+        <link rel="stylesheet" href="../styles/css/popup.css">
+        <link rel="stylesheet" href="../styles/css/homeCDD.css">
+        <link rel="stylesheet" href="../styles/css/homeCinema.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <script type="text/javascript" src="../scripts/DB/CDD.js"></script>
+        <script type="text/javascript" src="../scripts/DB/Cinema.js"></script>
+        <script type="text/javascript" src="../scripts/DB/Tipologie.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/viewLogics.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/home.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/homeCDD.js"></script>
+      </head>
+      </head>
+
+    <body>
+      <!--Popup for settings-->
+      <div id="popup"></div>
+
+      <div id="mainPage">
+        <div class="top-container" >
+            <h1 class="w3-jumbo link" onclick="window.location.href='./home.html'"><strong>Cinemine</strong></h1>
+            <p><strong>Tutti i film come, quando e dove vuoi.</strong></p>
+        </div>
+
+        <div class="header" id="myHeader">
+            <div class="w3-display-left margin_left">
+              <h1 class="w3-text w3-text-white link" onclick="window.location.href='./home.html'">Cinemine</h1>
+            </div>
+            <div class="w3-display-right margin_right">
+              <div class="w3-dropdown-hover w3-round w3-grey w3-text w3-text-white" >
+                <button class="w3-button w3-round">
+                  Gestisci Account <em class="material-icons" style="font-size: 1rem !important;" >expand_more</em>
+                </button>
+                <div class="w3-dropdown-content w3-border w3-bar-block w3-round w3-grey">
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='clearAndAppend(document.querySelector("#popup"),createInfos(getCDDInfos()));popup()'>
+                    Impostazioni
+                  </button>
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='logout("CasaDiDistribuzione");'>
+                    Logout
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content" >
+          <div class="left-column">
+            <br>
+            <br>
+            <strong><h1>I tuoi film</h1></strong>
+            <!-- Lista dei Film-->
+            <div id="labelDisplayer">
+            </div>
+          </div>
+
+          <div class="center-column">
+            <br>
+            <h1><strong>Aggiungi un nuovo Permesso</strong></h1>
+            <br>
+            <form id="addPermissionForm" method="POST" action="#" onsubmit="event.preventDefault();prepareDataPermesso(this);">
+              <div class="autocomplete" >
+                <input class='w3-input w3-round' id="CinemaInput" type="text" name="Cinema" placeholder="Cinema"/>
+              </div>
+              <div class="autocomplete" >
+                <input class='w3-input w3-round' id="FilmInput" type="text" name="Film" placeholder="Film"/>
+              </div>
+              <br>
+              <label for='endDate'><strong>Fine permesso</strong></label>
+              <input type="date" class='w3-round w3-input' id='endDate' name='endDate'/>
+              <label for='Permesso'><strong>Tipo di permesso</strong></label>
+              <select class="w3-select w3-round" id='Permesso' name='Permesso'>
+                <option value='Cinema'>Al Cinema</option>
+                <option value='Both'>Entrambi</option>
+              </select>
+              <br>
+            <button class="w3-btn w3-center-div w3-black w3-border-round" type="submit" >
+              Aggiungi permesso al Cinema
+            </button>
+            </form>
+          </div>
+
+          <div class="right-column">
+            <br>
+            <br>
+            <strong><h1>I tuoi Permessi</h1></strong>
+            <br/>
+            <div class="autocomplete" >
+              <input class='w3-input w3-round' id="CinemaSearch" type="text" placeholder="Cinema"/>
+            </div>
+            <button class="w3-btn w3-center-div w3-black w3-border-round" onclick="searchPermission(document.getElementById('CinemaSearch').value,document.getElementById('cinemaDisplayer'));">Cerca</button>
+            <br>
+            <!-- Lista dei Film programmati-->
+            <div id="cinemaDisplayer">
+            </div>
+          </div>
+
+        </div>
+    
+        <footer >
+            <div class="content footer">
+              <div class="left-column">
+                <p><strong>Contacts:</strong><br>
+                  email: cinemine@gmail.com<br>
+                  telefono: 800 xxxxxxx
+                </p>
+                <p> <strong>Dove siamo:</strong> <br>
+                  Via xxx Bologna<br>
+                </p>
+              </div>
+            <div class="center-column">
+              <p style="padding: 2rem;"> immagine logo CINEMINE</p>
+            </div>
+
+            <div class="right-column">
+              <p style="padding: 2rem;">Link a Faq e documenti legali (es privacy)</p>
+            </div>
+            </div>
+
+            
+          </div>
+        </footer>
+      </div>
+      
+    </body>
+    <script>
+
+      const labelDisplayer=document.getElementById("labelDisplayer");
+      const endDate= document.getElementById('endDate');
+    
+
+      function aggiornaPagina(){
+        let films= getOwnedFilmsCDD();
+        clear(labelDisplayer);
+        for( let el of films){
+          let filmLabel= createFilmLabel(el);
+          labelDisplayer.appendChild(filmLabel);
+        }
+        let add= createAddFilmLabel();
+        labelDisplayer.appendChild(add);
+      }
+
+      window.onload=()=>{
+        isLogged("CasaDiDistribuzione");
+        aggiornaPagina()
+        endDate.min=formatDate(new Date());
+        //let cinemas=getCinemaNames();
+        let cinemas=['Cinepark','Cinemaopolis','CinemaRedux','Cinema Rave','Cinemaadil'];
+        autocomplete(document.getElementById('CinemaInput'),cinemas);
+        autocomplete(document.getElementById('CinemaSearch'),cinemas);
+        let films=getOwnedFilmsCDD().map((el)=>el.nome);
+        autocomplete(document.getElementById('FilmInput'),films);
+      };
+
+      var header = document.getElementById("myHeader");
+      var sticky = header.offsetTop;
+      window.onscroll = function() {stickyFuntion(header,sticky)};
+
+
+    </script>
+</html>

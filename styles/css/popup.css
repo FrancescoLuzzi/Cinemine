@@ -1,0 +1,122 @@
+/*MainPage BLUR*/
+#mainPage.blur {
+	filter: blur(10px);
+	pointer-events: none;
+	user-select: none;
+}
+
+body.stop {
+	overflow-y: hidden;
+}
+
+/*POPUP*/
+#popup {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: auto;
+	width: 60vw;
+	padding: 50px;
+	box-shadow: 0 5px 30px rgba(0, 0, 0, 0.496);
+	background: linear-gradient(grey, rgba(196, 147, 12, 0.639));
+	visibility: hidden;
+	opacity: 0;
+	transition: 0.5s;
+	z-index: 11;
+}
+
+#popup.active {
+	top: 50%;
+	visibility: visible;
+	opacity: 1;
+	transition: 0.5s;
+}
+
+/*POPUP INFOS*/
+.infos {
+	margin-bottom: 1rem;
+	line-height: 1.5;
+	height: 100%;
+	width: 100%;
+}
+
+.infos > .imgFilm {
+	width: auto;
+	height: 30vh;
+	float: left;
+}
+
+/*POPUP ADD PROGRAMMAZIONE*/
+.infosContent {
+	width: 65%;
+	height: 100%;
+	margin-left: 2rem;
+	float: left;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}
+
+.infosContent > * {
+	margin-top: 1rem !important;
+}
+
+.infosContent > label {
+	width: 40%;
+}
+
+.infosContent > button {
+	width: 48%;
+	margin: 3px !important;
+	margin-top: 1rem !important;
+}
+
+#orari {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	width: 50%;
+	height: 50px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+
+#orari > * {
+	width: 30% !important;
+	margin: 3px;
+}
+
+.addOrario {
+	cursor: pointer;
+	font-size: 40px !important;
+	top: 9px;
+	border: solid 1px black;
+	box-shadow: 0 8px 8px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 19%);
+	border-radius: 5px;
+	margin-right: 3px;
+	user-select: none;
+}
+.addOrario:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	transform: scale(1.05, 1.05);
+	-webkit-transform: scale(1.05, 1.05);
+	-moz-transform: scale(1.05, 1.05);
+}
+
+.addOrario:active {
+	transform: scale(0.98, 0.98);
+	-webkit-transform: scale(0.98, 0.98);
+	-moz-transform: scale(0.98, 0.98);
+	box-shadow: 0 8px 8px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 19%);
+}
+
+#startDate,
+#endDate {
+	width: 50%;
+}
+
+#sale {
+	width: 20%;
+}

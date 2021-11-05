@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="it">
+  <meta charset="UTF-8">
+    <head>
+        <title>HomePage Cinema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../styles/css/login.css">
+        <link rel="stylesheet" href="../styles/css/loginApis.css">
+        <link rel="stylesheet" href="../styles/css/home.css">
+        <link rel="stylesheet" href="../styles/css/homeCinema.css">
+        <link rel="stylesheet" href="../styles/css/popup.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+        <script type="text/javascript" src="../scripts/DB/CDD.js"></script>
+        <script type="text/javascript" src="../scripts/DB/Cinema.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/viewLogics.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/home.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/homeCinema.js"></script>
+      </head>
+      </head>
+
+    <body>
+      <!--Popup for settings-->
+      <div id="popup"></div>
+
+      <div id="mainPage">
+        <div class="top-container" >
+            <h1 class="w3-jumbo link" onclick="window.location.href='./home.html'"><strong>Cinemine</strong></h1>
+            <p><strong>Tutti i film come, quando e dove vuoi.</strong></p>
+        </div>
+
+        <div class="header" id="myHeader">
+            <div class="w3-display-left margin_left">
+              <h1 class="w3-text w3-text-white link" onclick="window.location.href='./home.html'">Cinemine</h1>
+            </div>
+            <div class="w3-display-right margin_right">
+              <div class="w3-dropdown-hover w3-round w3-grey w3-text w3-text-white" >
+                <button class="w3-button w3-round">
+                  Gestisci Account <em class="material-icons" style="font-size: 1rem !important;" >expand_more</em>
+                </button>
+                <div class="w3-dropdown-content w3-border w3-bar-block w3-round w3-grey">
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='clearAndAppend(document.querySelector("#popup"),createInfos(getCinemaInfos()));popup()''>
+                    Impostazioni
+                  </button>
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='logout("Cinema");'>
+                    Logout
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content" >
+          <div class="left-column">
+            <br>
+            <br>
+            <strong><h1>I film a tua disposizione</h1></strong>
+            <!-- Lista dei Film-->
+            <div id="labelDisplayer">
+            </div>
+          </div>
+
+          <div class="center-column">
+            <br>
+            <h1><strong>Le tue sale cinematografiche</strong></h1>
+            <div id="saleDisplayer" class="display-middle">
+              <select class="w3-round" name="salaSelezionata" id="salaSelezionata"></select>
+              <button class="w3-button w3-round w3-grey w3-margin w3-border w3-border-black" onclick='clearAndAppend(document.querySelector("#popup"),createAddSala());popup()'>NuovaSala</button>
+              <div id='sala' class="sala"></div>
+            </div>
+            <br>
+            <h1>Le tue politiche di vendita</h1>
+            <br>
+            <div class="politiche">
+              <label for="intero" class="pol">Intero</label>
+              <input class='w3-round w3-input pol' id="intero" min="0" type="number">
+              <input class='w3-round w3-input pol' id="intIntero" type="text">
+              <label for="ridotto" class="pol">Ridotto</label>
+              <input class='w3-round w3-input pol' id="ridotto" min="0" type="number">
+              <input class='w3-round w3-input pol' id="intRidotto" type="text">
+              <button class="w3-button w3-round w3-grey w3-margin w3-border w3-border-black" onclick="handlerModificaPolitica()">Aggiorna</button>
+            </div>
+          </div>
+
+          <div class="right-column">
+            <br>
+            <br>
+            <strong><h1>Le tue programmazioni</h1></strong>
+            <!-- Lista dei Film programmati-->
+            <div id="scheduledDisplayer">
+            </div>
+          </div>
+
+        </div>
+          
+        <footer >
+          <div class="content footer">
+            <div class="left-column">
+              <p><strong>Contacts:</strong><br>
+                email: cinemine@gmail.com<br>
+                telefono: 800 xxxxxxx
+              </p>
+              <p> <strong>Dove siamo:</strong> <br>
+                Via xxx Bologna<br>
+              </p>
+            </div>
+          <div class="center-column">
+            <p style="padding: 2rem;"> immagine logo CINEMINE</p>
+          </div>
+
+          <div class="right-column">
+            <p style="padding: 2rem;">Link a Faq e documenti legali (es privacy)</p>
+          </div>
+          </div>
+
+          
+        </div>
+      </footer>
+      </div>
+      
+    </body>
+    <script>
+
+      const labelDisplayer=document.getElementById("labelDisplayer");
+      const scheduledDisplayer=document.getElementById("scheduledDisplayer");
+
+      function handlerModificaPolitica(){
+        modificaPolitiche(document.getElementById('intero'),document.getElementById('intIntero'),document.getElementById('ridotto'),document.getElementById('intRidotto'));
+      }
+
+      function aggiornaPagina(){
+        aggiornaLabelsFilms(labelDisplayer)
+        aggiornaScheduledFilms(scheduledDisplayer)
+        setUpSala(document.getElementById("salaSelezionata"), document.getElementById("sala") );
+        aggiornaPolitiche(document.getElementById('intero'),document.getElementById('intIntero'),document.getElementById('ridotto'),document.getElementById('intRidotto'));
+      }
+
+      document.getElementById('salaSelezionata').onchange=()=>{
+        aggiornaSala(document.getElementById("salaSelezionata"), document.getElementById("sala") );
+      }
+
+      window.onload=()=>{
+        isLogged("Cinema");
+        aggiornaPagina()
+      };
+
+      var header = document.getElementById("myHeader");
+      var sticky = header.offsetTop;
+      window.onscroll = function() {stickyFuntion(header,sticky)};
+
+      carousel(0);
+
+      document.getElementById('intero').onchange=()=>{
+        document.getElementById('ridotto').max=document.getElementById('intero').value;
+      }
+
+    </script>
+</html>

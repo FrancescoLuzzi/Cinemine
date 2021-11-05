@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+	<head>
+		<title>Login</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="../styles/css/login.css" />
+		<link rel="stylesheet" href="../styles/css/loginApis.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+		<script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+		<script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+		<script type="text/javascript" src="../scripts/DB/load.js"></script>
+	</head>
+	<body>
+		<div class="bgimg bgimg-brightness w3-display-container w3-text-white">
+			<div class="w3-display-topleft w3-padding-large w3-xlarge link" onclick="window.location.href='./home.html'">CineMine</div>
+			<div class="w3-box-shadow w3-border-round w3-panel login">
+				<div class="w3-padding-right-64 w3-padding-64 w3-padding-left-64">
+					<h1 class="w3-jumbo w3-center">Accedi</h1>
+					<hr class="w3-border-grey" style="margin: auto; width: 40%" />
+					<form id="Login" method="POST" action="#" onsubmit="event.preventDefault();loadData();login(this);">
+						<br />
+						<input
+							class="w3-input w3-light-grey w3-border-round w3-border-light-grey"
+							type="text"
+							id="username"
+							placeholder="Nome utente"
+							required="Nome utente"
+							autofocus
+						/>
+
+						<p>
+							<input
+								class="w3-input w3-light-grey w3-border w3-border-round w3-border-light-grey"
+								type="password"
+								id="password"
+								placeholder="Password"
+								required="Password"
+							/>
+						</p>
+						<p class="w3-margin-top">
+							<button class="w3-btn w3-center-div w3-black w3-border-round" type="submit" style="margin: auto !important; width: 100%">
+								Accedi
+							</button>
+						</p>
+					</form>
+					<p class="w3-medium w3-center w3-margin-top w3-text-grey">
+						Prima volta su CineMine?
+						<a href="./regform.html" class="w3-ancor" style="text-decoration: none">Registrati</a>.
+					</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

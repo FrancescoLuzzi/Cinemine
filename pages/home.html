@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+  <meta charset="UTF-8">
+    <head>
+        <title>HomePage</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../styles/css/login.css">
+        <link rel="stylesheet" href="../styles/css/loginApis.css">
+        <link rel="stylesheet" href="../styles/css/home.css">
+        <link rel="stylesheet" href="../styles/css/autocompletion.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src="../scripts/DB/load.js"></script>
+        <script type="text/javascript" src="../scripts/DB/CDD.js"></script>
+        <script type="text/javascript" src="../scripts/DB/Cinema.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/viewLogics.js"></script>
+        <script type="text/javascript" src="../scripts/site_logics/login.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/general.js"></script>
+        <script type="text/javascript" src="../scripts/codeGenerators/home.js"></script>
+      </head>
+      </head>
+
+    <body>
+      <div id="mainPage">
+        <div class="top-container">
+            <h1 class="w3-jumbo link" onclick="window.location.href='./home.html'"><strong>Cinemine</strong></h1>
+            <p><strong>Tutti i film come, quando e dove vuoi.</strong></p>
+        </div>
+
+        <div class="header" id="myHeader">
+            <div class="w3-display-left margin_left">
+              <h1 class="w3-text w3-text-white link" onclick="window.location.href='./home.html'">Cinemine</h1>
+            </div>
+            <div class="w3-display-right margin_right">
+              <button class="w3-button w3-round w3-grey w3-text w3-text-white loginBtn" onclick='window.location.href="./login.html";'>Login
+              </button>
+              <div class="w3-dropdown-hover w3-round w3-grey w3-text w3-text-white" >
+                <button class="w3-button w3-round">
+                  Registrati <em class="material-icons" style="font-size: 1rem !important;" >expand_more</em>
+                </button>
+                <div class="w3-dropdown-content w3-border w3-bar-block w3-round w3-grey">
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='window.location.href="./regform.html";'>
+                    Utente
+                  </button>
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='window.location.href="./regformCinema.html";'>
+                    Cinema
+                  </button>
+                  <button class="w3-button w3-bar-item w3-round w3-text-white" onclick='window.location.href="./regformCdD.html";'>
+                    CasaDiDistribuzione
+                  </button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content" >
+
+          <div class="left-column">
+            <br>
+            <h1><strong>Film Disponibili</strong></h1>
+            <br>
+            <div id="labelDisplayer"></div>
+          </div>
+
+          <div class="center-column">
+            <br>
+            <h1><strong>Ultime uscite al cinema</strong></h1>
+            <div id="filmDisplayer" class="display-middle">
+            </div>
+          </div>
+
+          <div class="right-column">
+            <br>
+            <h1><strong>Ricerca il tuo film</strong></h1>
+            <br>
+            <div class="autocomplete" style="position:relative;width: 60% !important;" >
+              <input class="w3-round w3-input" type="text" id="filmSearch"  placeholder="FilmName">
+            </div>
+            <br>
+            <button class="w3-button w3-round w3-border w3-border-black" style="margin-top: 20px;" onclick="searchFilm(document.querySelector('#filmSearch'),document.querySelector('#searchOutput'))">Cerca</button>
+            <div id="searchOutput" ></div>
+          </div>
+
+        </div>
+          
+        <footer >
+          <div class="content footer">
+            <div class="left-column">
+              <p><strong>Contacts:</strong><br>
+                email: cinemine@gmail.com<br>
+                telefono: 800 xxxxxxx
+              </p>
+              <p> <strong>Dove siamo:</strong> <br>
+                Via xxx Bologna<br>
+              </p>
+            </div>
+          <div class="center-column">
+            <p style="padding: 2rem;"> immagine logo CINEMINE</p>
+          </div>
+
+          <div class="right-column">
+            <p style="padding: 2rem;">Link a Faq e documenti legali (es privacy)</p>
+          </div>
+          </div>
+
+          
+        </div>
+      </footer>
+      </div>
+    </body>
+    <script>
+      const filmDisplayer=document.getElementById("filmDisplayer");
+      const labelDisplayer=document.getElementById("labelDisplayer");
+
+      var header = document.getElementById("myHeader");
+      var sticky = header.offsetTop;
+      window.onscroll = function() {stickyFuntion(header,sticky)};
+
+      window.onload=()=>{
+        let films= getOwnedFilmsCDD();
+        for( let el of films){
+          let film=createFilmSlide(el);
+          filmDisplayer.appendChild(film);
+          let filmLabel=createFilmLabel(el);
+          labelDisplayer.appendChild(filmLabel);
+        }
+
+        autocomplete(document.getElementById('filmSearch'),getOwnedFilmsCinema().map((el)=>el.nome));
+      };
+
+      carousel(0);
+
+      function searchFilm(filmName,output){
+        let allFilms=getOwnedFilmsCinema();
+        let films=allFilms.filter((el)=>el.nome==filmName.value);
+        if(films.length===0)return;
+        clear(output);
+        for(let el of films){
+          output.appendChild(createFilmSearch(el, "Cinepark"));
+        }
+      }
+    </script>
+</html>

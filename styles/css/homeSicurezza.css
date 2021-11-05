@@ -1,0 +1,65 @@
+.left-column,
+.right-column {
+	width: 50%;
+}
+
+.topContainerSicurezza {
+	background-color: #f1f1f1;
+	padding: 30px;
+	text-align: center;
+	z-index: 10;
+	min-height: 15%;
+	background-image: url('../../images/forestbridge.jpg');
+	background-size: cover;
+}
+
+.content {
+	flex-wrap: wrap;
+	align-content: flex-start;
+}
+
+.logOut {
+	width: 33%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+}
+.logOut > input,
+.logOut > button {
+	width: 80%;
+}
+
+.findLogs {
+	width: 100%;
+	height: 7em;
+	padding: 10px;
+	text-align: center;
+}
+
+#logDisplayer {
+	padding: 50px;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+.activate {
+	position: relative;
+	width: 70%;
+	padding: 9px;
+	margin: 5px;
+	border: 2px solid black;
+	border-radius: 5px;
+	box-shadow: 0 8px 8px 0 rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 19%);
+}
+#other > .activate,
+#users > .activate {
+	left: 15%;
+}
+
+.activate > button {
+	margin-left: 15px;
+}
