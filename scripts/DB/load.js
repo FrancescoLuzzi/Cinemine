@@ -16,9 +16,11 @@ const defaultFilms = [
 		nome: 'Il Diavolo Veste Prada',
 		src: '../images/diavoloVestePrada.jpg',
 		tipologia: ['rosa', 'comico'],
-		durata: '109',
+		durata: '19',
 	},
 ];
+
+const curr_year= new Date().getFullYear()
 
 //LOGS
 
@@ -41,20 +43,20 @@ function setUser(infos, films, tickets) {
 function loadUser(films) {
 	const filmsRented = films.slice(1, 3).map((el) => {
 		let el2 = JSON.parse(JSON.stringify(el));
-		el2.dataScadenza = `2021-10-${Math.floor(Math.random() * 18) + 10}`;
+		el2.dataScadenza = `${curr_year}-12-${Math.floor(Math.random() * 18) + 1}`;
 		return el2;
 	});
 	const ticketsOwned = films.slice(1, 3).map((el) => JSON.parse(JSON.stringify(el)));
 
 	ticketsOwned[0].posti = 'H5';
 	ticketsOwned[0].ora = '20:00';
-	ticketsOwned[0].data = '2021-10-25';
+	ticketsOwned[0].data = `${curr_year}-1-25`;
 	ticketsOwned[0].cinema = 'Cinepark';
 	ticketsOwned[0].sala = '2';
 
 	ticketsOwned[1].posti = 'G8';
 	ticketsOwned[1].ora = '22:00';
-	ticketsOwned[1].data = '2021-10-15';
+	ticketsOwned[1].data = `${curr_year}-1-15`;
 	ticketsOwned[1].cinema = 'Cinepark';
 	ticketsOwned[1].sala = '1';
 
@@ -122,7 +124,7 @@ function loadCinema(films) {
 
 	const filmsOwnedCinema = films.slice(1, 3).map((el) => {
 		let el2 = JSON.parse(JSON.stringify(el));
-		el2.dataScadenza = `2021-11-10`;
+		el2.dataScadenza = `${curr_year}-12-31`;
 		el2.noleggiabile = true;
 		return el2;
 	});
@@ -130,15 +132,15 @@ function loadCinema(films) {
 	const filmsScheduledCinema = films.slice(1, 3).map((el) => JSON.parse(JSON.stringify(el)));
 	let tmp = JSON.parse(JSON.stringify(sale[0]));
 	filmsScheduledCinema[0].intervalloScheduled = {
-		start: '2021-10-01',
-		end: '2021-10-30',
+		start: `${curr_year}-1-01`,
+		end: `${curr_year}-12-31`,
 	};
 	filmsScheduledCinema[0].orari = ['17.30', '20.00', '22.00'];
 	filmsScheduledCinema[0].sale = [tmp];
 	let tmp2 = JSON.parse(JSON.stringify(sale[1]));
 	filmsScheduledCinema[1].intervalloScheduled = {
-		start: '2021-10-01',
-		end: '2021-11-30',
+		start: `${curr_year}-1-01`,
+		end: `${curr_year}-12-31`,
 	};
 	filmsScheduledCinema[1].orari = ['17.30', '20.00'];
 	filmsScheduledCinema[1].sale = [tmp2];
@@ -147,12 +149,12 @@ function loadCinema(films) {
 	let tmp3 = JSON.parse(JSON.stringify(sale[0]));
 	tmp3.sala = occupaSalaRandom(tmp3.sala);
 	spettacoli[0].sala = tmp3;
-	spettacoli[0].data = '2021-10-07';
+	spettacoli[0].data = `${curr_year}-1-07`;
 	spettacoli[0].orario = '22.00';
 	let tmp4 = JSON.parse(JSON.stringify(sale[1]));
 	tmp4.sala = occupaSalaRandom(tmp4.sala);
 	spettacoli[1].sala = tmp4;
-	spettacoli[1].data = '2021-10-07';
+	spettacoli[1].data = `${curr_year}-1-07`;
 	spettacoli[1].orario = '20.00';
 
 	const politiche = [
@@ -187,13 +189,13 @@ function loadCDD(films) {
 
 	const permissions = [
 		{
-			dataScadenza: `2021-11-10`,
+			dataScadenza: `${curr_year}-12-31`,
 			cinema: 'Cinepark',
 			film: JSON.parse(JSON.stringify(defaultFilms[1])),
 			permission: 'Both',
 		},
 		{
-			dataScadenza: `2021-11-10`,
+			dataScadenza: `${curr_year}-12-31`,
 			cinema: 'Cinepark',
 			film: JSON.parse(JSON.stringify(defaultFilms[2])),
 			permission: 'Both',
