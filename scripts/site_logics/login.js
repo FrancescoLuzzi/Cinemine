@@ -47,8 +47,12 @@ function login(form) {
 			}
 			return;
 		}
-	} else {
+	} else if (username == "AddettoSicurezza") {
 		form.action = './homeSicurezza.html';
+	}
+	else{
+		alert("Nessun account riconosciuto")
+		return
 	}
 	let log = new Log(username, 'Logged In');
 	addLog(log);
