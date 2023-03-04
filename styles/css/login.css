@@ -1667,20 +1667,7 @@ a {
 }
 .w3-panel {
 	position: relative;
-	top: 100px;
 	background-color: rgba(0, 0, 0, 0.8) !important;
-}
-.login {
-	height: 550px !important;
-}
-.reg-utente {
-	height: 700px !important;
-}
-.reg-cdd {
-	height: 740px !important;
-}
-.reg-cinema {
-	height: 650px !important;
 }
 .w3-border-round {
 	border-radius: 4px !important;
@@ -1710,7 +1697,8 @@ html {
 
 .bgimg {
 	background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../../images/proiezione.jpg');
-
+	min-height: 100%;
+	overflow: hidden;
 	/* Preserve aspet ratio */
 	background-position: center center;
 	background-repeat: no-repeat;
