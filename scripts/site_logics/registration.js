@@ -3,7 +3,7 @@ function checkPassword(form) {
 	let repeatedPwd = document.getElementById('rpwp').value;
 	console.log(password === repeatedPwd);
 	if (password === repeatedPwd) {
-		form.submit();
+		window.location.href = form.action;
 		return true;
 	} else {
 		alert('le password non coincidono');

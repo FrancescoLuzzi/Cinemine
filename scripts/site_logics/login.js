@@ -57,7 +57,7 @@ function login(form) {
 	let log = new Log(username, 'Logged In');
 	addLog(log);
 	sessionStorage.setItem('logged', username);
-	form.submit();
+	window.location.href = form.action;
 }
 
 function blockCliente(Cliente) {

@@ -125,7 +125,7 @@ function prenota() {
 	}
 	film.dataScadenza = form['Date'].value;
 	addRentedFilm(film);
-	form.submit();
+	window.location.href = form.action;
 }
 
 /**
@@ -163,5 +163,5 @@ function prenotaTiket(film) {
 	film.sala = salaNum;
 	addOwnedTicket(film);
 	updateShow(show, newShow);
-	form.submit();
+	window.location.href = form.action;
 }
